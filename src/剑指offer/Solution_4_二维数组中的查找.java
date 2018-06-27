@@ -5,7 +5,7 @@ package 剑指offer;
  * @Description:
  * @Date: Created in 2018/6/27
  */
-public class Solution_59_二维数组中的查找 {
+public class Solution_4_二维数组中的查找 {
     public boolean Find(int target, int [][] array) {
         int row = array.length-1;
         int cow = 0;
