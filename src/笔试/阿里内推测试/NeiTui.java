@@ -1,4 +1,4 @@
-package 笔试.阿里内推;
+package 笔试.阿里内推测试;
 
 import java.util.Scanner;
 
