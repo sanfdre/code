@@ -11,10 +11,12 @@ public abstract  class AbstractTimeWhell implements InitializingBean{
      * 轮组指针
      */
     protected volatile int index = 0;
+
     /**
      * 轮组中槽的数量
      */
     protected int wheelNum;
+
     /**
      * 轮组对象（带槽数组）
      */
@@ -40,7 +42,6 @@ public abstract  class AbstractTimeWhell implements InitializingBean{
      * @param shareId
      */
     public abstract void add(int shareId);
-
 
     /**
      * 过期真正进行操作的（由具体的实现完）

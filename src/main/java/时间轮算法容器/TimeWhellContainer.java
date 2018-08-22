@@ -6,6 +6,11 @@ public class TimeWhellContainer extends AbstractTimeWhellContainer{
     }
 
     /**
+     *  需要用定时器任务调用indexAddOne（）方法实现
+     */
+
+
+    /**
      * 真正过期需要做的方法
      */
     public void realToDo() {
