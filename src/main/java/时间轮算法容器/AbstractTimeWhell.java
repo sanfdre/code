@@ -3,6 +3,7 @@ package 时间轮算法容器;
 
 import sun.misc.Unsafe;
 
+import java.lang.reflect.Field;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.springframework.beans.factory.InitializingBean;
 
@@ -20,7 +21,7 @@ public abstract  class AbstractTimeWhell implements InitializingBean{
     /**
      * 轮组对象（带槽数组）
      */
-    protected Node[] times = new Node[wheelNum];
+    protected Node[] times;
 
     /**
      * 定时器到点调度的方法 改变轮组中指针刻度
@@ -77,7 +78,19 @@ public abstract  class AbstractTimeWhell implements InitializingBean{
      * 槽节点
      */
     static class  Node{
-        private static final Unsafe unsafe = Unsafe.getUnsafe();
+        private static  Unsafe unsafe ;
+        static {
+
+            Field f = null  ; //Internal reference
+            try {
+                f = Unsafe.class.getDeclaredField("theUnsafe");
+                f.setAccessible(true);
+                unsafe = (Unsafe) f.get(null);
+            } catch (Exception e) {
+                e.printStackTrace();
+                unsafe = null;
+            }
+        }
         /**
          * 开始index
          */

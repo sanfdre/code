@@ -1,4 +1,5 @@
 package 时间轮算法容器;
+
 public class TimeWhellContainer extends AbstractTimeWhellContainer{
 
     public TimeWhellContainer(int wheelNum) {
@@ -23,4 +24,25 @@ public class TimeWhellContainer extends AbstractTimeWhellContainer{
     public void init() {
 
     }
+
+    public static void main(String[] args) {
+
+        try {
+            Thread.sleep(20000l);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println(1);
+        TimeWhellContainer timeWhellContainer = new TimeWhellContainer(1440);
+        timeWhellContainer.initTimes();
+        timeWhellContainer.times[1].compareAndSetEnd(0,33);
+        System.out.println(2);
+        try {
+            Thread.sleep(1000000l);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }

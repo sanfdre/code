@@ -59,6 +59,7 @@ public abstract class AbstractTimeWhellContainer extends AbstractTimeWhell{
     }
 
     public  void initTimes(){
+        times = new Node[wheelNum];
         for (int i = 0;i<wheelNum;i++){
             times[i] = new Node();
         }
