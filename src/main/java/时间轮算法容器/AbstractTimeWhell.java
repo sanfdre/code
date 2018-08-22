@@ -53,7 +53,10 @@ public abstract  class AbstractTimeWhell implements InitializingBean{
      */
     public abstract void init();
 
+    public abstract void initTimes();
+
     public void afterPropertiesSet() throws Exception {
+        initTimes();
         init();
     }
 
