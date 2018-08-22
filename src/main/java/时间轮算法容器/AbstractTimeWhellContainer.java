@@ -36,7 +36,7 @@ public abstract class AbstractTimeWhellContainer extends AbstractTimeWhell{
         //等待realDo()方法执行完成
         while (node.getState() ==1 ){
             try {
-                Thread.sleep(1000l);
+                Thread.sleep(10);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
