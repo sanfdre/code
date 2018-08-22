@@ -6,7 +6,7 @@ public abstract class AbstractTimeWhellContainer extends AbstractTimeWhell{
     }
 
     public void indexAddOne(){
-        //将start设置为1 代表不准进行添加
+        //将state设置为1 代表不准进行添加
         times[getIndex(index+1)].setState(1);
         index++;
         if(index>=times.length){
@@ -20,7 +20,7 @@ public abstract class AbstractTimeWhellContainer extends AbstractTimeWhell{
             //进行数据库撤回操作 异步线程池
             realToDo();
         }
-        //将start设置为-1 代表操作过了
+        //将statet设置为-1 代表操作过了
         times[temp].setState(-1);
     }
 
