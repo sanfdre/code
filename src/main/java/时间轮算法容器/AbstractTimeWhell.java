@@ -81,19 +81,6 @@ public abstract  class AbstractTimeWhell implements InitializingBean{
      * 槽节点
      */
     static class  Node{
-        private static  Unsafe unsafe ;
-        static {
-
-            Field f = null  ; //Internal reference
-            try {
-                f = Unsafe.class.getDeclaredField("theUnsafe");
-                f.setAccessible(true);
-                unsafe = (Unsafe) f.get(null);
-            } catch (Exception e) {
-                e.printStackTrace();
-                unsafe = null;
-            }
-        }
         /**
          * 开始index
          */
@@ -107,18 +94,33 @@ public abstract  class AbstractTimeWhell implements InitializingBean{
          * 槽状态 0代表初始状态 1代表不准进行添加操作 -1代表可以进行相应操作
          */
         private volatile int state=0;
+
+        /**
+         * 每个节点槽的计数器 当计数器为0的时候就不会执行数据库realTodo操作
+         */
         private AtomicInteger count=new AtomicInteger(0);
 
+        private static  Unsafe unsafe ;
         private static final long valueOffsetStart;
         private static final long valueOffsetEnd;
 
         static{
+            Field f = null  ; //Internal reference
             try {
+                //初始化unsafe
+                f = Unsafe.class.getDeclaredField("theUnsafe");
+                f.setAccessible(true);
+                unsafe = (Unsafe) f.get(null);
+
+                //初始化两个值的位置偏移量
                 valueOffsetStart = unsafe.objectFieldOffset
                         (Node.class.getDeclaredField("start"));
                 valueOffsetEnd = unsafe.objectFieldOffset
                         (Node.class.getDeclaredField("end"));
-            } catch (Exception ex) { throw new Error(ex); }
+            } catch (Exception ex) {
+                unsafe = null;
+                throw new Error(ex);
+            }
         }
 
         public final boolean compareAndSetStart(int expect, int update) {
