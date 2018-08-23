@@ -16,12 +16,13 @@ public abstract class AbstractTimeWhellContainer extends AbstractTimeWhell{
 
     public void realDo(){
         int temp = getIndex(index);
-        if(times[temp].getCount().get()>0){
+        Node node = times[temp];
+        if(node.getCount().get()>0){
             //进行数据库撤回操作 异步线程池
-            realToDo();
+            realToDo(node.getStart(),node.getEnd());
         }
         //将statet设置为-1 代表操作过了
-        times[temp].setState(-1);
+        node.setState(-1);
     }
 
     public void delete(int shareId){

@@ -45,15 +45,18 @@ public abstract  class AbstractTimeWhell implements InitializingBean{
     public abstract void add(int shareId);
 
     /**
-     * 过期真正进行操作的（由具体的实现完）
+     * 过期真正进行操作的（由具体的实现完成）
      */
-    public abstract void realToDo();
+    public abstract void realToDo(int start,int end);
 
     /**
      * 项目启动 初始化容器
      */
     public abstract void init();
 
+    /**
+     * 初始化数组
+     */
     public abstract void initTimes();
 
     public void afterPropertiesSet() throws Exception {
