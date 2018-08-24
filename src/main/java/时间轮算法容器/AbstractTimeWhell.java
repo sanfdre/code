@@ -1,6 +1,7 @@
 package 时间轮算法容器;
 
 
+import lombok.Data;
 import sun.misc.Unsafe;
 
 import java.lang.reflect.Field;
@@ -80,6 +81,7 @@ public abstract  class AbstractTimeWhell implements InitializingBean{
     /**
      * 槽节点
      */
+    @Data
     static class  Node{
         /**
          * 开始index
@@ -100,7 +102,7 @@ public abstract  class AbstractTimeWhell implements InitializingBean{
          */
         private AtomicInteger count=new AtomicInteger(0);
 
-        private static  Unsafe unsafe ;
+        private static final Unsafe unsafe ;
         private static final long valueOffsetStart;
         private static final long valueOffsetEnd;
 
@@ -118,7 +120,6 @@ public abstract  class AbstractTimeWhell implements InitializingBean{
                 valueOffsetEnd = unsafe.objectFieldOffset
                         (Node.class.getDeclaredField("end"));
             } catch (Exception ex) {
-                unsafe = null;
                 throw new Error(ex);
             }
         }
@@ -129,39 +130,6 @@ public abstract  class AbstractTimeWhell implements InitializingBean{
 
         public final boolean compareAndSetEnd(int expect, int update) {
             return unsafe.compareAndSwapInt(this, valueOffsetEnd, expect, update);
-        }
-
-
-        public int getStart() {
-            return start;
-        }
-
-        public void setStart(int start) {
-            this.start = start;
-        }
-
-        public int getEnd() {
-            return end;
-        }
-
-        public void setEnd(int end) {
-            this.end = end;
-        }
-
-        public AtomicInteger getCount() {
-            return count;
-        }
-
-        public void setCount(AtomicInteger count) {
-            this.count = count;
-        }
-
-        public int getState() {
-            return state;
-        }
-
-        public void setState(int state) {
-            this.state = state;
         }
     }
 
