@@ -87,6 +87,7 @@ public abstract  class AbstractTimeWhell implements InitializingBean{
          * 开始index
          */
         private volatile int start=0;
+
         /**
          * 结束index
          */

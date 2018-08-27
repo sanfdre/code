@@ -44,15 +44,14 @@ public abstract class AbstractTimeWhellContainer extends AbstractTimeWhell{
         }
 
         //cas操作 只要比start小的 都把它设置为start
-        //cas操作 只要比end小的 都把它设置为end
         int start = node.getStart();
-        int end = node.getEnd();
-
         while (start>shareId){
             node.compareAndSetStart(start,shareId);
             start = node.getStart();
         }
 
+        //cas操作 只要比end小的 都把它设置为end
+        int end = node.getEnd();
         while (end<shareId){
             node.compareAndSetEnd(end,shareId);
             end = node.getEnd();
