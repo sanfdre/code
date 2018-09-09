@@ -22,7 +22,7 @@
 //        }
 //    }
 //
-//    public void check(int[] array,boolean[] state,int maxLength){
+//    public void split(int[] array,boolean[] state,int maxLength){
 //        for (int i = 3;i<=maxLength;i++){
 //            int[] tempArray = new int[i];
 //
