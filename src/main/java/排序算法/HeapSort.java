@@ -19,6 +19,7 @@ public class HeapSort {
             dataDown(array,i,n);
         }
 
+        //调整节点
         for (int i = n;i>0;i--){
             swap(array,0,i-1);
             dataDown(array,1,i-1);
