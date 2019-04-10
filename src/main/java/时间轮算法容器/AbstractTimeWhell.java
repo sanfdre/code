@@ -8,7 +8,6 @@ import java.lang.reflect.Field;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.springframework.beans.factory.InitializingBean;
 
-@Data
 public abstract  class AbstractTimeWhell implements InitializingBean{
     /**
      * 轮组指针
@@ -82,7 +81,6 @@ public abstract  class AbstractTimeWhell implements InitializingBean{
     /**
      * 槽节点
      */
-    @Data
     static class  Node{
         /**
          * 开始index
@@ -132,6 +130,38 @@ public abstract  class AbstractTimeWhell implements InitializingBean{
 
         public final boolean compareAndSetEnd(int expect, int update) {
             return unsafe.compareAndSwapInt(this, valueOffsetEnd, expect, update);
+        }
+
+        public int getStart() {
+            return start;
+        }
+
+        public void setStart(int start) {
+            this.start = start;
+        }
+
+        public int getEnd() {
+            return end;
+        }
+
+        public void setEnd(int end) {
+            this.end = end;
+        }
+
+        public int getState() {
+            return state;
+        }
+
+        public void setState(int state) {
+            this.state = state;
+        }
+
+        public AtomicInteger getCount() {
+            return count;
+        }
+
+        public void setCount(AtomicInteger count) {
+            this.count = count;
         }
     }
 
